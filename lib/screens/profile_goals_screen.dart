@@ -918,7 +918,6 @@ class _ProfileGoalsScreenState extends State<ProfileGoalsScreen> with TickerProv
                       ),
                     );
                     if (picked != null) setState(() => _goalDeadline = picked);
-                    if (sheetContext.mounted) Navigator.of(sheetContext).pop();
                   },
                 ),
                 const SizedBox(height: 24),

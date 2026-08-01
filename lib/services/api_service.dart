@@ -3,7 +3,7 @@ import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ApiService {
-  static const String _baseUrl = 'http://127.0.0.1:8000/api';
+  static const String _baseUrl = 'https://backend-control-gastos.onrender.com/api';
   static const String _tokenKey = 'auth_token';
 
   static Future<String?> getToken() async {

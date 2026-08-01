@@ -85,10 +85,9 @@ static const _kClientId = '264386873541-l39qpkl2j918u53k3qu5lfpstelnvt77.apps.go
     setState(() => _googleLoading = true);
 
     try {
-      final googleSignIn = GoogleSignIn(
-        clientId: kIsWeb ? _googleClientId : null,
-        scopes: ['email', 'profile'],
-      );
+      final googleSignIn = GoogleSignIn(
+        clientId: _googleClientId,
+      );
       final account = await googleSignIn.signIn();
       if (account == null) {
         setState(() => _googleLoading = false);
