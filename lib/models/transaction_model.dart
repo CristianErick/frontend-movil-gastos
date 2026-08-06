@@ -37,13 +37,22 @@ class TransactionModel {
       categoryId: json['category_id'],
       amount: _parseAmount(json['amount']),
       description: json['description'],
-      date: DateTime.parse(json['date']),
+      date: _parseDate(json['date']),
       type: json['type'],
       referenceImage: json['reference_image'],
       category: json['category'] != null
           ? CategoryModel.fromJson(json['category'])
           : null,
     );
+  }
+
+  static DateTime _parseDate(dynamic value) {
+    if (value == null) return DateTime.now();
+    try {
+      return DateTime.parse(value.toString());
+    } catch (_) {
+      return DateTime.now();
+    }
   }
 }
 
@@ -94,7 +103,7 @@ class SavingsGoalModel {
       title: json['title'],
       targetAmount: _parseAmount(json['target_amount']),
       currentAmount: _parseAmount(json['current_amount']),
-      deadline: DateTime.parse(json['deadline']),
+      deadline: DateTime.tryParse(json['deadline']?.toString() ?? '') ?? DateTime.now(),
     );
   }
 

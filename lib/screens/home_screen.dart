@@ -181,7 +181,10 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
       }
     } catch (e) {
       debugPrint('Error al cargar datos: $e');
-      setState(() => _error = 'No se pudieron cargar los datos. Verifica la conexión con el servidor.');
+      setState(() {
+        final msg = e.toString();
+        _error = msg.length > 200 ? msg.substring(0, 200) : msg;
+      });
     } finally {
       setState(() => _loading = false);
     }
