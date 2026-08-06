@@ -22,6 +22,12 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   bool _loading = true;
   String? _error;
 
+  static double _toDouble(dynamic value) {
+    if (value is num) return value.toDouble();
+    if (value is String) return double.tryParse(value) ?? 0;
+    return 0;
+  }
+
   int _selectedNavIndex = 0;
 
   String _searchQuery = '';
@@ -165,7 +171,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
 
       final profile = profileResponse['user']?['profile'];
       if (profile != null) {
-        final budget = (profile['monthly_budget_limit'] as num?)?.toDouble();
+        final budget = _toDouble(profile['monthly_budget_limit']);
         setState(() => _monthlyBudgetLimit = budget);
       }
 

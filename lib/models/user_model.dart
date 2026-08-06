@@ -40,9 +40,16 @@ class ProfileModel {
     return ProfileModel(
       phone: json['phone'],
       currency: json['currency'] ?? 'PEN',
-      monthlyBudgetLimit: (json['monthly_budget_limit'] as num?)?.toDouble(),
+      monthlyBudgetLimit: _parseDouble(json['monthly_budget_limit']),
       avatar: json['avatar'],
     );
+  }
+
+  static double? _parseDouble(dynamic value) {
+    if (value == null) return null;
+    if (value is num) return value.toDouble();
+    if (value is String) return double.tryParse(value);
+    return null;
   }
 
   Map<String, dynamic> toJson() => {
